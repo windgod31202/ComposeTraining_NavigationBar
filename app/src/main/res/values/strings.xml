@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Compose_MaterialTest</string>
+    <string name="bottom_navigation_home">Home</string>
+    <string name="bottom_navigation_profile">Profile</string>
+    <string name="bottom_navigation_Search">Search</string>
+    <string name="bottom_navigation_Settings">Settings</string>
+</resources>
