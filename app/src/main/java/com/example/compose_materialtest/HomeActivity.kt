@@ -10,16 +10,19 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -34,10 +37,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.compose_materialtest.ui.theme.AppTheme
 
 class HomeActivity : ComponentActivity() {
@@ -50,122 +55,10 @@ class HomeActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Scaffold(
-                        bottomBar = { BottomNavigation(context = this) }
-                    ){padding ->
-                        HomeBackground()
-                    }
+                    Background()
                 }
             }
         }
-    }
-}
-
-// 底部導覽條
-@Composable
-private fun BottomNavigation(modifier: Modifier = Modifier, context: Context) {
-    val resources = context.resources
-    NavigationBar(
-        modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.surface,
-        contentColor = MaterialTheme.colorScheme.onSurface,
-    ) {
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    imageVector = Icons.Default.Home,
-                    contentDescription = null
-                )
-            },
-            label = {
-                Text(
-                    text = stringResource(R.string.bottom_navigation_home)
-                )
-            },
-            selected = true,
-            onClick = {
-                Log.e(TAG, "SootheBottomNavigation: Home" )
-                Toast.makeText(context, "Home", Toast.LENGTH_SHORT).show()
-            },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = MaterialTheme.colorScheme.secondary,
-                selectedTextColor = MaterialTheme.colorScheme.secondary,
-                unselectedIconColor = MaterialTheme.colorScheme.tertiary,
-                unselectedTextColor = MaterialTheme.colorScheme.tertiary
-            )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = null
-                )
-            },
-            label = {
-                Text(
-                    text = stringResource(R.string.bottom_navigation_Search)
-                )
-            },
-            selected = true,
-            onClick = {
-                Log.e(TAG, "SootheBottomNavigation: Search" )
-                Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
-            },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = MaterialTheme.colorScheme.secondary,
-                selectedTextColor = MaterialTheme.colorScheme.secondary,
-                unselectedIconColor = MaterialTheme.colorScheme.tertiary,
-                unselectedTextColor = MaterialTheme.colorScheme.tertiary
-            )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    imageVector = Icons.Default.AccountCircle,
-                    contentDescription = null
-                )
-            },
-            label = {
-                Text(
-                    text = stringResource(R.string.bottom_navigation_profile)
-                )
-            },
-            selected = false,
-            onClick = {
-                Log.e(TAG, "SootheBottomNavigation: Account" )
-                Toast.makeText(context, "Account", Toast.LENGTH_SHORT).show()
-            },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = MaterialTheme.colorScheme.secondary,
-                selectedTextColor = MaterialTheme.colorScheme.secondary,
-                unselectedIconColor = MaterialTheme.colorScheme.tertiary,
-                unselectedTextColor = MaterialTheme.colorScheme.tertiary
-            )
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    imageVector = Icons.Default.Settings,
-                    contentDescription = null
-                )
-            },
-            label = {
-                Text(
-                    text = stringResource(R.string.bottom_navigation_Settings)
-                )
-            },
-            selected = false,
-            onClick = {
-                Log.e(TAG, "SootheBottomNavigation: Settings" )
-                Toast.makeText(context, "Setting", Toast.LENGTH_SHORT).show()
-            },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = MaterialTheme.colorScheme.secondary,
-                selectedTextColor = MaterialTheme.colorScheme.secondary,
-                unselectedIconColor = MaterialTheme.colorScheme.tertiary,
-                unselectedTextColor = MaterialTheme.colorScheme.tertiary
-            )
-        )
     }
 }
 
@@ -176,8 +69,10 @@ fun HomeInfo(greetingMes: String, greetName:String) {
     // 如果想在重組後保留狀態，請使用 remember「記住」可變動狀態。
     val expanded = remember { mutableStateOf(false) }
     val extraPadding = if (expanded.value) 72.dp else 0.dp
-
-    Column(modifier = Modifier.padding(24.dp).background(MaterialTheme.colorScheme.onBackground)) {
+    
+    Column(modifier = Modifier
+        .padding(24.dp)
+        .background(MaterialTheme.colorScheme.onBackground)) {
         Row(modifier = Modifier
             .padding(bottom = extraPadding)
             .background(color = MaterialTheme.colorScheme.onBackground)
@@ -209,20 +104,14 @@ fun HomeInfo(greetingMes: String, greetName:String) {
         }
     }
 }
+
 @Composable
-fun HomeBackground(){
-    val image = painterResource(id = R.drawable.ic_launcher_foreground)
+fun Background(){
     Box(modifier = Modifier
         .fillMaxSize()
-        .background(MaterialTheme.colorScheme.background)) {
+        .background(MaterialTheme.colorScheme.background)
+        .padding(top = 30.dp)) {
         Column (Modifier.padding(10.dp)){
-            Icon(
-                imageVector = Icons.Default.Star,
-                contentDescription = null,
-                Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .padding(12.dp)
-            )
             HomeInfo(
                 greetingMes = "HomePage",
                 greetName = "Jay"
@@ -234,12 +123,7 @@ fun HomeBackground(){
 @Preview(showBackground = true)
 @Composable
 fun HomeActivityPreview() {
-    val context = LocalContext.current // 獲取context在Preview中顯示
     AppTheme {
-        Scaffold(
-            bottomBar = { BottomNavigation(context = context) }
-        ){padding ->
-            HomeBackground()
-        }
+        Background()
     }
 }

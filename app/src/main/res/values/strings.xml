@@ -47,4 +47,9 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="bottom_navigation_menu">Menu</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="search">Search info</string>
+    <string name="title_activity_profile_acitivity">ProfileAcitivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 </resources>
