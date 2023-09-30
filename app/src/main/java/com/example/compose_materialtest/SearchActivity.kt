@@ -1,9 +1,11 @@
 package com.example.compose_materialtest
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -25,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -50,8 +54,10 @@ class SearchActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Search() {
+    val context = LocalContext.current
     // 如果想在重組後保留狀態，請使用 remember「記住」可變動狀態。
     var searchText by remember{ mutableStateOf("")}
+    var sendBool by remember{ mutableStateOf(false)}
 
     Column(modifier = Modifier
         .padding(24.dp)
@@ -70,11 +76,14 @@ fun Search() {
             trailingIcon = {
                 if (searchText.isNotEmpty()) {
                     Icon(
-                        imageVector = (Icons.Default.Search),
+                        imageVector = Icons.Default.Send,
                         contentDescription = null,
-                        modifier = Modifier
-                            .background(MaterialTheme.colorScheme.onBackground)
-                            .padding(ButtonDefaults.IconSpacing)
+                        modifier = Modifier.clickable(onClick = {
+                            Toast.makeText(context, "Search: $searchText", Toast.LENGTH_SHORT).show()
+                            searchText = ""
+                        })
+                            .padding(4.dp),
+                        tint = MaterialTheme.colorScheme.secondary
                     )
                 }
             },

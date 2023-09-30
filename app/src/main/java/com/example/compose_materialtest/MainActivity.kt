@@ -132,7 +132,7 @@ private fun BottomNavigation(modifier: Modifier = Modifier, context:Context) {
                     false.also { settingBool.value = it }
                     Log.e(TAG, "SootheBottomNavigation: Home" )
                     navController.navigateSingleTopTo("MainActivity")
-                    Toast.makeText(context, "Home", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.bottom_navigation_menu ,Toast.LENGTH_SHORT).show()
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.secondary,
@@ -162,7 +162,7 @@ private fun BottomNavigation(modifier: Modifier = Modifier, context:Context) {
                     false.also { settingBool.value = it }
                     Log.e(TAG, "SootheBottomNavigation: Home" )
                     navController.navigateSingleTopTo("homepage")
-                    Toast.makeText(context, "Home", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.bottom_navigation_home, Toast.LENGTH_SHORT).show()
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.secondary,
@@ -192,7 +192,7 @@ private fun BottomNavigation(modifier: Modifier = Modifier, context:Context) {
                     false.also { settingBool.value = it }
                     navController.navigateSingleTopTo("searchActivity")
                     Log.e(TAG, "SootheBottomNavigation: Search" )
-                    Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.bottom_navigation_Search, Toast.LENGTH_SHORT).show()
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.secondary,
@@ -222,7 +222,7 @@ private fun BottomNavigation(modifier: Modifier = Modifier, context:Context) {
                     false.also { settingBool.value = it }
                     navController.navigateSingleTopTo("profileActivity")
                     Log.e(TAG, "SootheBottomNavigation: Account" )
-                    Toast.makeText(context, "Account", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.bottom_navigation_profile, Toast.LENGTH_SHORT).show()
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.secondary,
@@ -252,7 +252,7 @@ private fun BottomNavigation(modifier: Modifier = Modifier, context:Context) {
                     true.also { settingBool.value = it }
                     navController.navigateSingleTopTo("settingActivity")
                     Log.e(TAG, "SootheBottomNavigation: Settings" )
-                    Toast.makeText(context, "Setting", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.title_activity_settings, Toast.LENGTH_SHORT).show()
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.secondary,
